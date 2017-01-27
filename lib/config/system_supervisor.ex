@@ -9,10 +9,12 @@ defmodule Config.SystemSupervisor do
   end
 
   def init(_) do
+    
     processes = [
       supervisor(Config.Database, ["./persist/"]),
       supervisor(Config.ServerSupervisor, []),
-      worker(Config.Cache, [])
+      worker(Config.Cache, []),
+      worker(Config.Stash, [])
     ]
     supervise(processes, strategy: :one_for_one)
   end

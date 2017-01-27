@@ -53,7 +53,7 @@ defmodule Config.Web do
     end
 
     defp jformat(entries) do
-        
+
         entries |> Poison.encode!
     end
     # defp entries(list_name, date) do
@@ -73,15 +73,15 @@ defmodule Config.Web do
 
 
     # curl -d '' 'http://localhost:5454/add_entry?list=bob&date=20131219&title=Dentist'
-    post "/add_entry" do
-        conn
-        |> Plug.Conn.fetch_query_params
-        |> add_entry
-        |> respond
-    end
+    # post "/add_entry" do
+    #     conn
+    #     |> Plug.Conn.fetch_query_params
+    #     |> add_entry
+    #     |> respond
+    # end
 
     post "/add_item" do
-        conn 
+        conn
         |> Plug.Conn.fetch_query_params
         |> add_item
         |> respond
@@ -98,18 +98,18 @@ defmodule Config.Web do
         Plug.Conn.assign(conn, :response, "OK")
     end
 
-    defp add_entry(conn) do
-        conn.params["list"]
-        |> Todo.Cache.server_process
-        |> Todo.Server.add_entry(
-                %{
-                date: parse_date(conn.params["date"]),
-                title: conn.params["title"]
-                }
-            )
-
-        Plug.Conn.assign(conn, :response, "OK")
-    end
+    # defp add_entry(conn) do
+    #     conn.params["list"]
+    #     |> Todo.Cache.server_process
+    #     |> Todo.Server.add_entry(
+    #             %{
+    #             date: parse_date(conn.params["date"]),
+    #             title: conn.params["title"]
+    #             }
+    #         )
+    #
+    #     Plug.Conn.assign(conn, :response, "OK")
+    # end
 
 
     defp parse_date(

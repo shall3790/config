@@ -1,4 +1,4 @@
-defmodule Config.Supervisor do
+defmodule Config.SupervisorXX do
     use Supervisor
 
     def start_link do
